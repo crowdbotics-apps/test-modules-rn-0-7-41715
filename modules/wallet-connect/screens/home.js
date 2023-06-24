@@ -1,38 +1,43 @@
-import React, { useEffect, useState, Fragment } from "react"; // @ts-ignore
-
+import React, { useEffect, useState, Fragment } from "react";
+// @ts-ignore
 import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native"; // @ts-ignore
-
+import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
+// @ts-ignore
 import { useFocusEffect } from "@react-navigation/native";
 import { getBalance, globalConnector, setGlobalConnector, switchMetamask } from "../utils";
-import Button from "../components/Button"; // @ts-ignore
+import Button from "../components/Button";
+// @ts-ignore
+import refreshIcon from "../assets/refresh-icon.png";
 
-import refreshIcon from "../assets/refresh-icon.png"; // @ts-ignore
-
-import LinearGradient from "react-native-linear-gradient"; // @ts-ignore
-
+// @ts-ignore
+import LinearGradient from "react-native-linear-gradient";
+// @ts-ignore
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
-import CurrencyModal from "../components/CurrencyModal"; // @ts-ignore
+import CurrencyModal from "../components/CurrencyModal";
 
+// @ts-ignore
 import walletIcon from "../assets/wallet.png";
 
-const Home = props => {
+const Home = (props) => {
   const connector = useWalletConnect();
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [isSwitch, setIsSwitch] = useState(false);
   const [changeWallet, setChangeWallet] = useState(false);
   const [balance, setBalance] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  useFocusEffect(React.useCallback(() => {
-    if (connector._peerMeta) {
-      setConnectedWallet(connector._peerMeta);
-    }
 
-    if (connector.connected) {
-      setIsSwitch(false);
-      setGlobalConnector(connector);
-    }
-  }, [connector]));
+  useFocusEffect(
+    React.useCallback(() => {
+      if (connector._peerMeta) {
+        setConnectedWallet(connector._peerMeta);
+      }
+      if (connector.connected) {
+        setIsSwitch(false);
+        setGlobalConnector(connector);
+      }
+    }, [connector])
+  );
+
   useEffect(() => {
     if (isSwitch) {
       if (!connector.connected) {
@@ -54,11 +59,14 @@ const Home = props => {
       setChangeWallet(false);
     }
   }, [connector]);
-  useFocusEffect(React.useCallback(() => {
-    if (globalConnector) {
-      getAccount();
-    }
-  }, []));
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (globalConnector) {
+        getAccount();
+      }
+    }, [])
+  );
   useEffect(() => {
     if (globalConnector) {
       getAccount();
@@ -68,7 +76,6 @@ const Home = props => {
     if (connector.connected) {
       connector.on("session_update", (error, payload) => {
         getAccount();
-
         if (error) {
           throw error;
         }
@@ -85,13 +92,14 @@ const Home = props => {
     setModalVisible(!modalVisible);
   };
 
-  const handleCurrencyModalItemPress = async chainId => {
+  const handleCurrencyModalItemPress = async (chainId) => {
     await switchMetamask(chainId);
   };
+  return (
+    <>
 
-  return <>
-
-      {connector.connected && connectedWallet && <View style={styles.top}>
+      {connector.connected && connectedWallet &&
+        <View style={styles.top}>
           <View style={[styles.account, styles.accounted]}>
             <TouchableOpacity onPress={switchCurrencyHandler}>
               <Text style={styles.accountText} numberOfLines={1} ellipsizeMode='middle'>{globalConnector && globalConnector._accounts}</Text>
@@ -105,11 +113,12 @@ const Home = props => {
               <Image style={styles.refreshIcon} source={refreshIcon} />
             </TouchableOpacity>
             <View>
-              <Text style={styles.balanceText}>{balance ? `${balance}` : <ShimmerPlaceHolder style={styles.OqwJSuxm} width={50} height={15} LinearGradient={LinearGradient} />}</Text>
+              <Text style={styles.balanceText}>{balance ? `${balance}` : <ShimmerPlaceHolder style={{ borderRadius: 4 }} width={50} height={15} LinearGradient={LinearGradient} />}</Text>
               <Text style={styles.balanceTxt}>Balance</Text>
             </View>
           </View>
-        </View>}
+        </View>
+      }
 
       <View style={connector.connected ? styles.container : styles.homeContainer}>
         <View>
@@ -175,19 +184,25 @@ const Home = props => {
             </View>
           </Fragment>}
         </View>
-        {!connector.connected && <View style={styles.connectText}>
+        {
+          !connector.connected && <View style={styles.connectText}>
 
             {!connector.connected && <Image style={styles.walletIcon} source={walletIcon} />}
             {!connector.connected && <Text style={styles.fwb}>Connect your Wallet</Text>}
-          </View>}
+          </View>
+        }
         <View style={styles.btn}>
-          {!connector.connected ? <Button onPress={() => connector.connect()}>Connect to wallet</Button> : <Button onPress={() => connector.killSession()} style={styles.kill}>Kill Session</Button>}
+          {!connector.connected
+            ? <Button onPress={() => connector.connect()}>Connect to wallet</Button>
+            : <Button onPress={() => connector.killSession()} style={styles.kill}>Kill Session</Button>}
         </View>
       </View>
       <View>
         <CurrencyModal modalVisible={modalVisible} setModalVisible={setModalVisible} onItemPress={handleCurrencyModalItemPress} />
       </View>
-    </>;
+    </>
+
+  );
 };
 
 const styles = StyleSheet.create({
@@ -227,61 +242,20 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column"
   },
-  accountText: {
-    width: 115
-  },
-  kill: {
-    backgroundColor: "red",
-    color: "white",
-    fontWeight: "bold",
-    marginRight: "15"
-  },
-  pt10: {
-    paddingVertical: 10
-  },
-  funds: {
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
-    marginTop: 20
-  },
-  fundButton: {
-    width: "48%"
-  },
-  connectText: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  },
+  accountText: { width: 115 },
+  kill: { backgroundColor: "red", color: "white", fontWeight: "bold", marginRight: "15" },
+  pt10: { paddingVertical: 10 },
+  funds: { display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between", marginTop: 20 },
+  fundButton: { width: "48%" },
+  connectText: { display: "flex", justifyContent: "center", alignItems: "center" },
   refreshIcon: {
     width: 20,
     height: 20
   },
-  balance: {
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 15
-  },
-  fwb: {
-    fontWeight: "bold"
-  },
-  btn: {
-    textAlign: "center",
-    marginBottom: 20,
-    paddingHorizontal: 30
-  },
-  walletCard: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    height: 76,
-    width: "100%",
-    padding: 10,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
+  balance: { display: "flex", flexDirection: "row", marginTop: 15 },
+  fwb: { fontWeight: "bold" },
+  btn: { textAlign: "center", marginBottom: 20, paddingHorizontal: 30 },
+  walletCard: { backgroundColor: "white", borderRadius: 10, height: 76, width: "100%", padding: 10, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
   walletCardDetailContainer: {
     marginTop: 17,
     backgroundColor: "white",
@@ -299,52 +273,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   switched: {
-    marginTop: 25,
-    width: 120
+    marginTop: 25, width: 120
   },
   getAccount: {
-    marginRight: 5,
-    marginTop: 4
+    marginRight: 5, marginTop: 4
   },
   balanceText: {
-    fontSize: 20,
-    fontWeight: "bold"
+    fontSize: 20, fontWeight: "bold"
   },
   balanceTxt: {
-    color: "#7C7C7C",
-    fontSize: 14,
-    alignSelf: "flex-end",
-    textAlign: "right"
+    color: "#7C7C7C", fontSize: 14, alignSelf: "flex-end", textAlign: "right"
   },
   walletBalance: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 28,
-    marginTop: 14,
-    paddingHorizontal: 23
+    display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 28, marginTop: 14, paddingHorizontal: 23
   },
   walletText: {
     fontSize: 16
   },
   myWallet: {
-    display: "flex",
-    flexDirection: "row"
+    display: "flex", flexDirection: "row"
   },
   walletName: {
-    color: "#26292A",
-    fontSize: 14,
-    marginLeft: 10,
-    alignSelf: "center"
+    color: "#26292A", fontSize: 14, marginLeft: 10, alignSelf: "center"
   },
   onlineText: {
     color: "#12D790"
   },
   walletIcon: {
     marginBottom: 10
-  },
-  OqwJSuxm: {
-    borderRadius: 4
   }
 });
 export default Home;
