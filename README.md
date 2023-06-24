@@ -63,6 +63,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-live-camera-filters](modules/live-camera-filters)
 - [react-native-login](modules/login)
 - [react-native-qr-code](modules/qr-code)
+- [react-native-maps](modules/maps)
 
 # Getting started: Frontend
 
