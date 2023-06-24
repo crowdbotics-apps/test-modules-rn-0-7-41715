@@ -1,9 +1,7 @@
 import { getGlobalOptions } from "@options";
-
 const global = getGlobalOptions();
 const BASE_URL = global.url;
-
-export const saveSignature = async (data) => {
+export const saveSignature = async data => {
   try {
     const response = await fetch(`${BASE_URL}/modules/signature/upload_signature/`, {
       method: "POST",
