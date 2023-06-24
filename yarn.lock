@@ -1542,7 +1542,7 @@
 "@modules/privacy-policy-webview@file:./modules/privacy-policy-webview":
   version "1.0.0"
 
-"@modules/push-notifications@file:./modules/push-notifications/":
+"@modules/push-notifications@file:./modules/push-notifications":
   version "1.0.0"
 
 "@modules/qr-code@file:./modules/qr-code":
@@ -1550,6 +1550,9 @@
   dependencies:
     react-native-camera "4.2.1"
     react-native-qrcode-scanner "1.5.5"
+
+"@modules/signature@file:./modules/signature/":
+  version "1.0.0"
 
 "@modules/social-login@file:./modules/social-login":
   version "1.0.0"
@@ -8149,6 +8152,11 @@ react-native-screens@3.10.2:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
+react-native-signature-canvas@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-signature-canvas/-/react-native-signature-canvas-4.3.0.tgz#8f47e2671522664a66049a220613012c738fa3b2"
+  integrity sha512-RgAUmgHmPeZWAKwYcLqFYRKm2kL1q/yHd2CHUch1nLuVd82D+HCjIQ8WOdJSjWfgss3llRU4PBvnjU0aEhj8DQ==
+
 react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
@@ -8212,10 +8220,10 @@ react-native-web@^0.18.10:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.2"
 
-react-native-webview@11.23.0:
-  version "11.23.0"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.23.0.tgz#603a584236da2e993906e6a094f165dcac3a1fdb"
-  integrity sha512-mGrgsMnYcQONvQy59xpBn87sKqkCsSkqIDRo+c2Ov4ISYl1j90wFBs+qViVJRWdoNHVuoCAZ4nZkJ65mhDpHhA==
+react-native-webview@11.17.0:
+  version "11.17.0"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.17.0.tgz#318ee8314662866148ca2b8db07549038e1c0c64"
+  integrity sha512-mm6XYOne4K0c9eYOArmJOuo9fOUeESB7DT+xihLcX84qMTsepPTcnkKha5BxuFwlvKKlSj4KzgkUMl15Mhbvdw==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
