@@ -1,4 +1,6 @@
+
 const BASE_URL = "https://www.googleapis.com/calendar/v3/calendars";
+
 export const createAppointment = async (accessToken, data) => {
   try {
     const response = await fetch(`${BASE_URL}/primary/events`, {
@@ -14,6 +16,7 @@ export const createAppointment = async (accessToken, data) => {
     throw new Error("NETWORK_ERROR").message;
   }
 };
+
 export const getAppointmentByDate = async (accessToken, maxResults = 100, datetime) => {
   try {
     const response = await fetch(`${BASE_URL}/primary/events?showDeleted=false&orderBy=startTime&singleEvents=true&maxResults=${maxResults}&timeMin=${datetime}`, {
@@ -28,7 +31,8 @@ export const getAppointmentByDate = async (accessToken, maxResults = 100, dateti
     throw new Error("NETWORK_ERROR").message;
   }
 };
-export const getAllAppointments = async accessToken => {
+
+export const getAllAppointments = async (accessToken) => {
   try {
     const response = await fetch(`${BASE_URL}/primary/events?showDeleted=false&orderBy=startTime&singleEvents=true`, {
       method: "GET",
@@ -42,6 +46,7 @@ export const getAllAppointments = async accessToken => {
     throw new Error("NETWORK_ERROR").message;
   }
 };
+
 export const deleteAppointment = async (accessToken, id) => {
   try {
     const response = await fetch(`${BASE_URL}/primary/events/${id}`, {
