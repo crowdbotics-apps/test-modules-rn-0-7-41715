@@ -12,36 +12,35 @@ const QrGenerator = () => {
 
   const pressHandler = () => {
     setIsLoader(true);
-    getQr({ text: key })
-      .then(res => res.json())
-      .then(res => {
-        setIsLoader(false);
-        setQr(res.qrcode);
-      })
-      .catch(e => {
-        setIsLoader(false);
-        console.log(e);
-      });
+    getQr({
+      text: key
+    }).then(res => res.json()).then(res => {
+      setIsLoader(false);
+      setQr(res.qrcode);
+    }).catch(e => {
+      setIsLoader(false);
+      console.log(e);
+    });
   };
 
-  return (
-    <View style={styles.container}>
-      { isLoader && <Loader /> }
+  return <View style={styles.container}>
+      {isLoader && <Loader />}
       <View style={styles.input}>
         <Text style={styles.text}>Enter Qr Key:</Text>
         <Input placeholder='Enter' value={key} setValue={setKey} />
       </View>
       <View style={styles.qrContainer}>
-        {qr && <Image source={{ uri: `data:image/png;base64,${qr}` }} style={styles.qr} />}
+        {qr && <Image source={{
+        uri: `data:image/png;base64,${qr}`
+      }} style={styles.qr} />}
       </View>
       <View style={styles.btn}>
         <Button onPress={pressHandler}>Generate</Button>
       </View>
-    </View>
-  );
+    </View>;
 };
-export default QrGenerator;
 
+export default QrGenerator;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -64,5 +63,4 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200
   }
-
 });

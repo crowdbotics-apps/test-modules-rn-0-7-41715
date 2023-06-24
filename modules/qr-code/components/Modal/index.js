@@ -1,17 +1,15 @@
 import React from "react";
-
 import { StyleSheet, Text, View, Modal } from "react-native";
 import Button from "../Button";
 
-const QrModal = ({ modalVisible, data, setModalVisible }) => {
-  return (
-    <View>
+const QrModal = ({
+  modalVisible,
+  data,
+  setModalVisible
+}) => {
+  return <View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-      >
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text>{data}</Text>
@@ -23,8 +21,7 @@ const QrModal = ({ modalVisible, data, setModalVisible }) => {
         </View>
       </Modal>
 
-    </View>
-  );
+    </View>;
 };
 
 const styles = StyleSheet.create({
@@ -39,7 +36,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -73,5 +69,4 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 });
-
 export default QrModal;

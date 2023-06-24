@@ -1,15 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
-// @ts-ignore
-import QRCodeScanner from "react-native-qrcode-scanner";
-// @ts-ignore
+import { StyleSheet, Text } from "react-native"; // @ts-ignore
+
+import QRCodeScanner from "react-native-qrcode-scanner"; // @ts-ignore
+
 import { RNCamera } from "react-native-camera";
 import QrModal from "../Modal";
 
-const QrScanner = (props) => {
+const QrScanner = props => {
   const [data, setData] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-
   useEffect(() => {
     if (data !== "") {
       setModalVisible(true);
@@ -20,24 +19,15 @@ const QrScanner = (props) => {
     setData(e.data);
   };
 
-  return (
-    <Fragment>
-      <QRCodeScanner
-        onRead={onSuccess}
-        flashMode={RNCamera.Constants.FlashMode.torch}
-        topContent={
-          <Text style={styles.centerText}>
-          </Text>
-        }
-      />
-      <QrModal modalVisible={modalVisible} setModalVisible={setModalVisible} data={data}/>
+  return <Fragment>
+      <QRCodeScanner onRead={onSuccess} flashMode={RNCamera.Constants.FlashMode.torch} topContent={<Text style={styles.centerText}>
+          </Text>} />
+      <QrModal modalVisible={modalVisible} setModalVisible={setModalVisible} data={data} />
 
-    </Fragment>
-  );
+    </Fragment>;
 };
 
 export default QrScanner;
-
 const styles = StyleSheet.create({
   centerText: {
     flex: 1,
