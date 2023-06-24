@@ -1,25 +1,24 @@
 import React from "react";
 import { View, StyleSheet, FlatList, Text, TouchableNativeFeedback, Image } from "react-native";
-import { FILTERS } from "../../options"; // @ts-ignore
-
-import Warm from "../../assets/warm1.jpg"; // @ts-ignore
-
-import classic from "../../assets/classic1.jpg"; // @ts-ignore
-
-import vintage from "../../assets/vintage1.jpg"; // @ts-ignore
-
-import sharp from "../../assets/sharp1.jpg"; // @ts-ignore
-
-import negative from "../../assets/negative1.jpg"; // @ts-ignore
-
-import sepia from "../../assets/sepia1.jpg"; // @ts-ignore
-
-import cool from "../../assets/cool1.jpg"; // @ts-ignore
-
+import { FILTERS } from "../../options";
+// @ts-ignore
+import Warm from "../../assets/warm1.jpg";
+// @ts-ignore
+import classic from "../../assets/classic1.jpg";
+// @ts-ignore
+import vintage from "../../assets/vintage1.jpg";
+// @ts-ignore
+import sharp from "../../assets/sharp1.jpg";
+// @ts-ignore
+import negative from "../../assets/negative1.jpg";
+// @ts-ignore
+import sepia from "../../assets/sepia1.jpg";
+// @ts-ignore
+import cool from "../../assets/cool1.jpg";
+// @ts-ignore
 import bright from "../../assets/bright1.jpg";
-export default function Filter({
-  selectFilter
-}) {
+
+export default function Filter({ selectFilter }) {
   const warmUri = Image.resolveAssetSource(Warm).uri;
   const classicUri = Image.resolveAssetSource(classic).uri;
   const sharpUri = Image.resolveAssetSource(sharp).uri;
@@ -32,33 +31,42 @@ export default function Filter({
   const colors = ["#FCF1D6", "#F9D8D9", "#D9DADD", "#FCF1D6", "#F9D8D9", "#D9DADD"];
   const titleColor = ["#d5f7cd", "#d1bfef", "#edc0c0", "#d5f7cd", "#d1bfef", "#edc0c0"];
 
-  const pressFilter = settings => {
+  const pressFilter = (settings) => {
     selectFilter(settings);
-  }; // @ts-ignore
-
-
-  const ItemRender = ({
-    name,
-    index,
-    settings
-  }) => <TouchableNativeFeedback onPress={() => pressFilter(settings)}>
-      <View style={[styleSheet.item, styleSheet.wZVlQKYJ]}>
-        <Image source={{
-        uri: Uris[index]
-      }} style={styleSheet.itemText} />
-        <Text style={[styleSheet.titleText, styleSheet.xcOBXHlD]}>{name}</Text>
+  };
+  // @ts-ignore
+  const ItemRender = ({ name, index, settings }) => (
+    <TouchableNativeFeedback onPress={() => pressFilter(settings)}>
+      <View style={[styleSheet.item, { backgroundColor: colors[index % colors.length] }]} >
+        <Image source={{ uri: Uris[index] }} style={styleSheet.itemText} />
+        <Text style={[styleSheet.titleText, { backgroundColor: titleColor[index % colors.length] }]} >{name}</Text>
       </View>
-    </TouchableNativeFeedback>;
+    </TouchableNativeFeedback>
+  );
 
   const Separator = () => {
-    return <View style={styleSheet.SQMDSHEi} />;
+    return (
+      <View
+        style={{
+          height: 100,
+          width: 7
+        }}
+      />
+    );
   };
 
-  return <FlatList data={FILTERS} renderItem={({
-    item,
-    index
-  }) => <ItemRender name={item.name} index={index} settings={item.settings} />} keyExtractor={item => item.id.toString()} ItemSeparatorComponent={Separator} horizontal={true} showsHorizontalScrollIndicator={false} />;
+  return (
+    <FlatList
+      data={FILTERS}
+      renderItem={({ item, index }) => <ItemRender name={item.name} index={index} settings={item.settings} />}
+      keyExtractor={item => item.id.toString()}
+      ItemSeparatorComponent={Separator}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+    />
+  );
 }
+
 const styleSheet = StyleSheet.create({
   titleText: {
     fontSize: 14,
@@ -83,15 +91,5 @@ const styleSheet = StyleSheet.create({
     height: 70,
     width: 100,
     resizeMode: "stretch"
-  },
-  wZVlQKYJ: {
-    backgroundColor: "colors.undefined"
-  },
-  xcOBXHlD: {
-    backgroundColor: "titleColor.undefined"
-  },
-  SQMDSHEi: {
-    height: 100,
-    width: 7
   }
 });

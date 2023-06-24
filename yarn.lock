@@ -1446,7 +1446,7 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@modules/appointment@file:./modules/appointment/":
+"@modules/appointment@file:./modules/appointment":
   version "1.0.0"
   dependencies:
     "@react-navigation/native-stack" "6.5.0"
@@ -1458,6 +1458,13 @@
 
 "@modules/articles@file:./modules/articles":
   version "1.0.0"
+
+"@modules/live-camera-filters@file:./modules/live-camera-filters/":
+  version "1.0.0"
+  dependencies:
+    "@react-native-community/cameraroll" "^4.1.2"
+    react-native-filter-camera "0.1.18"
+    react-native-vector-icons "^9.2.0"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
@@ -1486,6 +1493,11 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@react-native-community/cameraroll@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cameraroll/-/cameraroll-4.1.2.tgz#489c6bb6137571540d93c543d5fcf8c652b548ec"
+  integrity sha512-jkdhMByMKD2CZ/5MPeBieYn8vkCfC4MOTouPpBpps3I8N6HUYJk+1JnDdktVYl2WINnqXpQptDA2YptVyifYAg==
 
 "@react-native-community/cli-clean@^10.1.1":
   version "10.1.1"
@@ -7296,6 +7308,11 @@ react-native-elements@^3.4.3:
     opencollective-postinstall "^2.0.3"
     react-native-ratings "8.0.4"
     react-native-size-matters "^0.3.1"
+
+react-native-filter-camera@0.1.18:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/react-native-filter-camera/-/react-native-filter-camera-0.1.18.tgz#0d78f43df31dbb7790168ac7690f8ea21f26cb06"
+  integrity sha512-AlMisBq4ZihoBqQRwkMSB+RtZ7Qdq75aw7tGdAMIKvsyl2sOX8t22UxDf07QeKqqJJ0J1PUk6NXs06eo/JGJkQ==
 
 react-native-gesture-handler@^2.10.0:
   version "2.10.1"
