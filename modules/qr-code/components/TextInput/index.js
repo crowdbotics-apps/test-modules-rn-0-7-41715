@@ -1,11 +1,20 @@
 import React from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
 
-const Input = props => {
-  return <View>
-        <TextInput style={textStyles.input} placeholder={props.placeholder} value={props.value} onChangeText={num => props.setValue(num)} placeholderTextColor='#ddd' editable={props.editable !== false} />
+const Input = (props) => {
+  return (
+      <View>
+        <TextInput
+          style={textStyles.input}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChangeText={(num) => props.setValue(num)}
+          placeholderTextColor='#ddd'
+          editable={props.editable !== false}
+        />
         {props.errorText ? <Text style={textStyles.error}>{props.errorText}</Text> : null}
-      </View>;
+      </View>
+  );
 };
 
 const textStyles = StyleSheet.create({

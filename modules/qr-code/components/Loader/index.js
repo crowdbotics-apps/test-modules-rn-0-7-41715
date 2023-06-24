@@ -2,13 +2,14 @@ import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 
 const Loader = () => {
-  return <View style={styles.container}>
+  return (
+    <View style={styles.container}>
       <View style={styles.loaderContainer}>
-        <ActivityIndicator color="#000" size={20} />
+        <ActivityIndicator color="#000" size={20}/>
       </View>
-    </View>;
+    </View>
+  );
 };
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
