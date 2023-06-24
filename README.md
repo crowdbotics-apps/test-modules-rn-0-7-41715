@@ -73,6 +73,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-terms-and-conditions-webview](modules/terms-and-conditions-webview)
 - [react-native-social-login](modules/social-login)
 - [react-native-splash](modules/splash)
+- [react-native-push-notifications](modules/push-notifications)
 
 # Getting started: Frontend
 
