@@ -1,12 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
 
-const Button = props => {
-  return <TouchableHighlight onPress={props.onPress} disabled={props.disabled} underlayColor='#DDDDDD'>
+const Button = (props) => {
+  return (
+    <TouchableHighlight onPress={props.onPress} disabled={props.disabled} underlayColor='#DDDDDD'>
       <View style={!props.clicked ? styles.button : styles.clicked}>
         <Text style={styles.text}>{props.children}</Text>
       </View>
-    </TouchableHighlight>;
+    </TouchableHighlight>
+  );
 };
 
 const styles = StyleSheet.create({

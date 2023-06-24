@@ -4,8 +4,7 @@ import { set2faMethod } from "../../api";
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
 import { OptionsContext } from "@options";
-
-const AuthTypes = props => {
+const AuthTypes = (props) => {
   const options = useContext(OptionsContext);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,10 +13,10 @@ const AuthTypes = props => {
     await set2faMethod({
       id: options.user.id,
       method: "SMS"
-    }).then(res => {
+    }).then((res) => {
       setIsLoading(false);
       props.navigation.navigate("Verification");
-    }).catch(err => {
+    }).catch((err) => {
       setIsLoading(false);
       console.log("Error: ", err);
     });
@@ -28,10 +27,10 @@ const AuthTypes = props => {
     await set2faMethod({
       id: options.user.id,
       method: "EMAIL"
-    }).then(res => {
+    }).then((res) => {
       setIsLoading(false);
       props.navigation.navigate("Verification");
-    }).catch(err => {
+    }).catch((err) => {
       setIsLoading(false);
       console.log("Error: ", err);
     });
@@ -42,17 +41,18 @@ const AuthTypes = props => {
     await set2faMethod({
       id: options.user.id,
       method: "2FA"
-    }).then(res => {
+    }).then((res) => {
       setIsLoading(false);
       props.navigation.navigate("GoogleAuth");
-    }).catch(err => {
+    }).catch((err) => {
       setIsLoading(false);
       console.log("Error: ", err);
     });
   };
 
-  return <>
-      {isLoading && <Loader />}
+  return (
+    <>
+      {isLoading && <Loader/>}
       <View style={styles.main}>
         <Text style={styles.text}>Verification methods</Text>
         <Text style={styles.text13}>Please select an option for verification from the following:</Text>
@@ -74,7 +74,8 @@ const AuthTypes = props => {
           </Button>
         </View>
       </View>
-    </>;
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -91,5 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginBottom: 12
   }
+
 });
+
 export default AuthTypes;

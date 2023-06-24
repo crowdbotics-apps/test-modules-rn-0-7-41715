@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Text, StyleSheet, View, Linking } from "react-native";
 import Loader from "../../components/Loader";
-import { getCode } from "../../api"; // @ts-ignore
-
+import { getCode } from "../../api";
+// @ts-ignore
 import QRCode from "react-native-qrcode-svg";
 import { OptionsContext } from "@options";
 import Button from "../../components/Button";
 
-const GoogleAuth = props => {
+const GoogleAuth = (props) => {
   const options = useContext(OptionsContext);
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState(false);
@@ -16,7 +16,6 @@ const GoogleAuth = props => {
 
   const openLink = () => {
     const supported = Linking.canOpenURL(link);
-
     if (supported) {
       Linking.openURL(link);
     }
@@ -30,8 +29,12 @@ const GoogleAuth = props => {
       setIsLoading(false);
     }).catch(err => err);
   }, []);
-  return <View style={styles.main}>
-      {isLoading ? <Loader /> : <>
+
+  return (
+    <View style={styles.main}>
+      {isLoading
+        ? <Loader />
+        : <>
         <View>
           <View style={styles.sameDevice}>
             <Button onPress={openLink}>
@@ -40,22 +43,23 @@ const GoogleAuth = props => {
           </View>
         </View>
         <View style={styles.pt30}>
-          <QRCode value={link} size={150} />
+          <QRCode value={link} size={150}/>
         </View>
         <View style={styles.pt30}>
           <Text style={[styles.text, styles.description]}>Please enter the below credentials in the Google authenticator app to get a code and verify.</Text>
         </View>
 
         <View style={styles.credentials}>
-          <Text style={styles.auth}>Authenticator Credential</Text>
+          <Text style={ styles.auth}>Authenticator Credential</Text>
           <Text style={styles.text}>Account Name: {name} </Text>
           <Text style={styles.text}>Account Key: {key} </Text>
         </View>
       </>}
-    </View>;
+    </View>
+  );
 };
-
 export default GoogleAuth;
+
 const styles = StyleSheet.create({
   main: {
     padding: 10,
