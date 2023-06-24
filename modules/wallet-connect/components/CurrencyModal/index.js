@@ -4,33 +4,26 @@ import { currencyData } from "../../utils";
 import Button from "../Button";
 import CurrencyList from "../CurrencyList";
 
-const CurrencyModal = ({ setModalVisible, modalVisible, onItemPress }) => {
-  const renderItem = ({ item }) => (
-    <CurrencyList data={item} setModalVisible={setModalVisible} modalVisible={modalVisible} onItemPress={onItemPress}/>
-  );
+const CurrencyModal = ({
+  setModalVisible,
+  modalVisible,
+  onItemPress
+}) => {
+  const renderItem = ({
+    item
+  }) => <CurrencyList data={item} setModalVisible={setModalVisible} modalVisible={modalVisible} onItemPress={onItemPress} />;
 
-  return (
-    <Modal
-      presentationStyle='overFullScreen'
-      animationType="slide"
-      transparent={true}
-      visible={modalVisible}
-    >
+  return <Modal presentationStyle='overFullScreen' animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.modalView}>
         <Text style={styles.heading}>Currency</Text>
-        <FlatList
-        data={currencyData}
-        renderItem={renderItem}
-        keyExtractor={item => item.chainId}
-
-        />
-        <View style={{ width: 100 }}>
+        <FlatList data={currencyData} renderItem={renderItem} keyExtractor={item => item.chainId} />
+        <View style={styles.lwoNudva}>
           <Button onPress={() => setModalVisible(false)}>Close</Button>
         </View>
       </View>
-    </Modal>
-  );
+    </Modal>;
 };
+
 const styles = StyleSheet.create({
   modalView: {
     margin: 20,
@@ -53,7 +46,9 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
     marginRight: 40
+  },
+  lwoNudva: {
+    width: 100
   }
 });
-
 export default CurrencyModal;
