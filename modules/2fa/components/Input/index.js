@@ -1,18 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
 
-const Input = (props) => {
-  return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder={props.placeholder}
-        onChangeText={(num) => props.setValue(num)}
-        placeholderTextColor='#ddd'
-      />
+const Input = props => {
+  return <View style={styles.container}>
+      <TextInput style={styles.input} placeholder={props.placeholder} onChangeText={num => props.setValue(num)} placeholderTextColor='#ddd' />
       {props.errorText ? <Text style={styles.error}>{props.errorText}</Text> : null}
-    </View>
-  );
+    </View>;
 };
 
 const styles = StyleSheet.create({
@@ -26,7 +19,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "lightgray",
     color: "#000"
-
   },
   error: {
     fontSize: 13,
