@@ -67,6 +67,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-chat](modules/chat)
 - [react-native-fingerprint-authentication](modules/fingerprint-authentication)
 - [react-native-2fa](modules/2fa)
+- [react-native-onboarding](modules/onboarding)
 
 # Getting started: Frontend
 
