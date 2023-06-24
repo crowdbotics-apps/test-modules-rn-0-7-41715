@@ -76,6 +76,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-push-notifications](modules/push-notifications)
 - [react-native-signature](modules/signature)
 - [react-native-user-profile](modules/user-profile)
+- [react-native-typeform-webhook](modules/typeform-webhook)
 
 # Getting started: Frontend
 
