@@ -78,6 +78,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-user-profile](modules/user-profile)
 - [react-native-typeform-webhook](modules/typeform-webhook)
 - [react-native-wallet-connect](modules/wallet-connect)
+- [react-native-youtube-player](modules/youtube-player)
 
 # Getting started: Frontend
 
