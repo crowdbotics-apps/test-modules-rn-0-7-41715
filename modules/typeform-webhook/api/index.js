@@ -1,11 +1,9 @@
-import options from "../options";
-// @ts-ignore
-import { getGlobalOptions } from "@options";
+import options from "../options"; // @ts-ignore
 
+import { getGlobalOptions } from "@options";
 const global = getGlobalOptions();
 const BASE_URL = global.url;
-
-export const getForms = (oauthToken) => {
+export const getForms = oauthToken => {
   try {
     const res = fetch("https://api.typeform.com/forms", {
       method: "GET",
@@ -13,14 +11,12 @@ export const getForms = (oauthToken) => {
         Accept: "application/json",
         Authorization: `Bearer ${oauthToken}`
       }
-    }
-    );
+    });
     return res;
   } catch (error) {
     throw new Error("NETWORK_ERROR").message;
   }
 };
-
 export const createWebHook = (oauthToken, formId, enabled) => {
   try {
     const res = fetch(`https://api.typeform.com/forms/${formId}/webhooks/${options.WEBHOOK_TAG}`, {
@@ -34,14 +30,12 @@ export const createWebHook = (oauthToken, formId, enabled) => {
         enabled: enabled,
         url: options.WEBHOOK_URL
       })
-    }
-    );
+    });
     return res;
   } catch (error) {
     throw new Error("NETWORK_ERROR").message;
   }
 };
-
 export const getWebHook = (oauthToken, id) => {
   try {
     const res = fetch(`https://api.typeform.com/forms/${id}/webhooks`, {
@@ -51,15 +45,13 @@ export const getWebHook = (oauthToken, id) => {
         Authorization: `Bearer ${oauthToken}`,
         "Content-Type": "application/json; charset=UTF-8"
       }
-    }
-    );
+    });
     return res;
   } catch (error) {
     throw new Error("NETWORK_ERROR").message;
   }
 };
-
-export const getResponses = (id) => {
+export const getResponses = id => {
   try {
     const res = fetch(`${BASE_URL}/modules/typeform-webhook/form-answer/${id}`, {
       method: "GET",
@@ -67,9 +59,7 @@ export const getResponses = (id) => {
         Accept: "application/json",
         "Content-Type": "application/json; charset=UTF-8"
       }
-    }
-    );
-
+    });
     return res;
   } catch (error) {
     throw new Error("NETWORK_ERROR").message;
