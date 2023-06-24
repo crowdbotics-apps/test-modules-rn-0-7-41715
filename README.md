@@ -79,6 +79,7 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-typeform-webhook](modules/typeform-webhook)
 - [react-native-wallet-connect](modules/wallet-connect)
 - [react-native-youtube-player](modules/youtube-player)
+- [react-native-app-menu](modules/app-menu)
 
 # Getting started: Frontend
 
