@@ -21,7 +21,6 @@
     "@modules/live-camera-filters": "file:./modules/live-camera-filters/",
     "@modules/login": "file:./modules/login/",
     "@modules/navigation-tabs": "file:./modules/navigation-tabs/",
-    "@modules/onboarding": "file:./modules/onboarding/",
     "@modules/privacy-policy-webview": "file:./modules/privacy-policy-webview/",
     "@modules/qr-code": "file:./modules/qr-code/",
     "@modules/signature": "file:./modules/signature/",
