@@ -25,7 +25,6 @@
     "@modules/navigation-tabs": "file:./modules/navigation-tabs/",
     "@modules/onboarding": "file:./modules/onboarding/",
     "@modules/privacy-policy-webview": "file:./modules/privacy-policy-webview/",
-    "@modules/push-notifications": "file:./modules/push-notifications/",
     "@modules/qr-code": "file:./modules/qr-code/",
     "@modules/signature": "file:./modules/signature/",
     "@modules/social-login": "file:./modules/social-login/",
