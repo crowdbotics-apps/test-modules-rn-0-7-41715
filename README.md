@@ -59,7 +59,6 @@ This react_native application was built with Crowdbotics www.crowdbotics.com
 
 This section will show any installed modules you add from the Storyboard Modules section.
 - [react-native-terms-and-conditions-webview](modules/terms-and-conditions-webview)
-- [react-native-splash](modules/splash)
 - [react-native-typeform-webhook](modules/typeform-webhook)
 - [react-native-youtube-player](modules/youtube-player)
 - [react-native-zoom-free-calling](modules/zoom-free-calling)
