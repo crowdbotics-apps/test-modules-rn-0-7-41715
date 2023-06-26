@@ -1938,9 +1938,6 @@
     uuid "^8.3.2"
     zustand "^3.5.13"
 
-"@modules/fingerprint-authentication@file:./modules/fingerprint-authentication":
-  version "1.0.0"
-
 "@modules/live-camera-filters@file:./modules/live-camera-filters":
   version "1.0.0"
   dependencies:

@@ -18,7 +18,6 @@
     "@modules/app-menu": "file:./modules/app-menu/",
     "@modules/appointment": "file:./modules/appointment/",
     "@modules/chat": "file:./modules/chat/",
-    "@modules/fingerprint-authentication": "file:./modules/fingerprint-authentication/",
     "@modules/live-camera-filters": "file:./modules/live-camera-filters/",
     "@modules/login": "file:./modules/login/",
     "@modules/maps": "file:./modules/maps/",
