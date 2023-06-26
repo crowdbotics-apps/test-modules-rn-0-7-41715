@@ -16,7 +16,6 @@
     "@babel/polyfill": "^7.12.1",
     "@modules/app-menu": "file:./modules/app-menu/",
     "@modules/articles": "file:./modules/articles/",
-    "@modules/social-login": "file:./modules/social-login/",
     "@react-native-async-storage/async-storage": "1.17.1",
     "@react-native-community/checkbox": "0.5.10",
     "@react-native-cookies/cookies": "6.0.11",
