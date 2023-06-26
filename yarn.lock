@@ -1662,13 +1662,6 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@modules/live-camera-filters@file:./modules/live-camera-filters":
-  version "1.0.0"
-  dependencies:
-    "@react-native-community/cameraroll" "^4.1.2"
-    react-native-filter-camera "0.1.18"
-    react-native-vector-icons "^9.2.0"
-
 "@modules/login@file:./modules/login":
   version "1.0.0"
   dependencies:
@@ -9363,14 +9356,6 @@ react-native-vector-icons@8.1.0:
     lodash.omit "^4.5.0"
     lodash.pick "^4.4.0"
     lodash.template "^4.5.0"
-    prop-types "^15.7.2"
-    yargs "^16.1.1"
-
-react-native-vector-icons@^9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-9.2.0.tgz#3c0c82e95defd274d56363cbe8fead8d53167ebd"
-  integrity sha512-wKYLaFuQST/chH3AJRjmOLoLy3JEs1JR6zMNgTaemFpNoXs0ztRnTxcxFD9xhX7cJe1/zoN5BpQYe7kL0m5yyA==
-  dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
