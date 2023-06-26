@@ -70,7 +70,6 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-signature](modules/signature)
 - [react-native-typeform-webhook](modules/typeform-webhook)
 - [react-native-youtube-player](modules/youtube-player)
-- [react-native-app-menu](modules/app-menu)
 - [react-native-zoom-free-calling](modules/zoom-free-calling)
 
 # Getting started: Frontend
