@@ -20,7 +20,6 @@
     "@modules/chat": "file:./modules/chat/",
     "@modules/live-camera-filters": "file:./modules/live-camera-filters/",
     "@modules/login": "file:./modules/login/",
-    "@modules/maps": "file:./modules/maps/",
     "@modules/navigation-tabs": "file:./modules/navigation-tabs/",
     "@modules/onboarding": "file:./modules/onboarding/",
     "@modules/privacy-policy-webview": "file:./modules/privacy-policy-webview/",
