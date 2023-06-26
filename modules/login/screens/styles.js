@@ -5,8 +5,8 @@ const { width, height } = Dimensions.get("window");
 const guidelineBaseWidth = 350;
 const guidelineBaseHeight = 680;
 
-const scale = size => (width / guidelineBaseWidth) * size;
-const scaleVertical = size => (height / guidelineBaseHeight) * size;
+const scale = (size) => (width / guidelineBaseWidth) * size;
+const scaleVertical = (size) => (height / guidelineBaseHeight) * size;
 
 export const Color = {
   malibu: "#46E1FD",
@@ -25,7 +25,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "flex-start",
     paddingHorizontal: 26,
-    alignItems: "center"
+    alignItems: "center",
+    height: "100%"
   },
   input: {
     backgroundColor: "white",
@@ -74,19 +75,6 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
     marginBottom: scale(10),
     marginTop: scaleVertical(63)
-  },
-  logo: {
-    width: 155,
-    height: 155,
-    alignSelf: "center",
-    resizeMode: "contain"
-  },
-  imageBackground: {
-    flex: 1,
-    justifyContent: "center",
-    resizeMode: "cover",
-    height: "100%",
-    width: "100%"
   },
   textRow: {
     textAlign: "center",
@@ -146,6 +134,23 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     margin: 10,
     fontSize: 18
+  },
+  backgroundImg: {
+    flex: 1,
+    justifyContent: "center",
+    resizeMode: "cover",
+    height: "100%",
+    width: "100%"
+  },
+  logoImg: {
+    width: 155,
+    height: 155,
+    alignSelf: "center",
+    resizeMode: "contain"
+  },
+  resetText: {
+    color: "#fff",
+    fontSize: 15
   }
 });
 

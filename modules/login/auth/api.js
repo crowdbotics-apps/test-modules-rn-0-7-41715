@@ -1,6 +1,8 @@
 import axios from "axios";
+import { getGlobalOptions } from "@options";
 
-const BASE_URL = "https://your-app-backend.botics.co"; // your app back-end url
+const global = getGlobalOptions();
+const BASE_URL = global.url; // change your BASE_URL in `options/options.js` to edit this value
 
 const authAPI = axios.create({
   baseURL: BASE_URL,
@@ -30,26 +32,10 @@ function apiAuthUserRequest(payload) {
 function apiResetPasswordRequest(payload) {
   return authAPI.post("/rest-auth/password/reset/", payload);
 }
-
-function apiFacebookLogin(payload) {
-  return authAPI.post("/modules/social-auth/facebook/login/", payload);
-}
-
-function apiGoogleLogin(payload) {
-  return authAPI.post("/modules/social-auth/google/login/", payload);
-}
-
-function apiAppleLogin(payload) {
-  return authAPI.post("/modules/social-auth/apple/login/", payload);
-}
-
 export const api = {
   apiLoginRequest,
   apiSignupRequest,
   apiLogoutRequest,
   apiResetPasswordRequest,
-  apiAuthUserRequest,
-  apiFacebookLogin,
-  apiGoogleLogin,
-  apiAppleLogin
+  apiAuthUserRequest
 };

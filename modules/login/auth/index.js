@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { mapErrorMessage } from "./utils";
 import { api } from "./api";
-
 export const loginRequest = createAsyncThunk(
   "login/loginRequest",
   async (payload) => {
@@ -37,29 +36,6 @@ export const resetPassword = createAsyncThunk(
   "login/resetPassword",
   async (payload) => {
     const response = await api.apiResetPasswordRequest(payload);
-    return response.data;
-  }
-);
-
-export const facebookLogin = createAsyncThunk(
-  "login/facebookLogin",
-  async (payload) => {
-    const response = await api.apiFacebookLogin(payload);
-    return response.data;
-  }
-);
-
-export const googleLogin = createAsyncThunk(
-  "login/googleLogin",
-  async (payload) => {
-    const response = await api.apiGoogleLogin(payload);
-    return response.data;
-  }
-);
-export const appleLogin = createAsyncThunk(
-  "login/appleLogin",
-  async (payload) => {
-    const response = await api.apiAppleLogin(payload);
     return response.data;
   }
 );
@@ -165,63 +141,6 @@ export const slice = createSlice({
       }
     },
     [resetPassword.rejected]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.api.error = mapErrorMessage(action.error);
-        state.api.loading = "idle";
-      }
-    },
-    [facebookLogin.pending]: (state) => {
-      if (state.api.loading === "idle") {
-        state.api.loading = "pending";
-        state.api.error = null;
-      }
-    },
-    [facebookLogin.fulfilled]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.user = action.payload.user;
-        state.token = action.payload.key;
-        state.api.error = null;
-      }
-    },
-    [facebookLogin.rejected]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.api.error = mapErrorMessage(action.error);
-        state.api.loading = "idle";
-      }
-    },
-    [googleLogin.pending]: (state) => {
-      if (state.api.loading === "idle") {
-        state.api.loading = "pending";
-        state.api.error = null;
-      }
-    },
-    [googleLogin.fulfilled]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.user = action.payload.user;
-        state.token = action.payload.key;
-        state.api.error = null;
-      }
-    },
-    [googleLogin.rejected]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.api.error = mapErrorMessage(action.error);
-        state.api.loading = "idle";
-      }
-    },
-    [appleLogin.pending]: (state) => {
-      if (state.api.loading === "idle") {
-        state.api.loading = "pending";
-        state.api.error = null;
-      }
-    },
-    [appleLogin.fulfilled]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.user = action.payload.user;
-        state.token = action.payload.key;
-        state.api.error = null;
-      }
-    },
-    [appleLogin.rejected]: (state, action) => {
       if (state.api.loading === "pending") {
         state.api.error = mapErrorMessage(action.error);
         state.api.loading = "idle";

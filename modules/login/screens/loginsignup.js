@@ -1,37 +1,15 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  TextInput,
-  ActivityIndicator,
-  Alert,
-  Platform
-} from "react-native";
-import {
-  AppleButton,
-  appleAuthAndroid
-} from "@invertase/react-native-apple-authentication";
-import { useSelector, useDispatch } from "react-redux";
-import { HOME_SCREEN_NAME, validateEmail } from "./constants";
-import { buttonStyles, textInputStyles, Color } from "./styles";
-import {
-  GoogleSigninButton,
-  GoogleSignin,
-  statusCodes
-} from "@react-native-google-signin/google-signin";
-import { LoginManager, AccessToken } from "react-native-fbsdk";
-import { GOOGLE_WEB_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from "../auth/utils";
-import { appleForAndroid, appleForiOS } from "../auth/apple";
-import {
-  loginRequest,
-  signupRequest,
-  facebookLogin,
-  googleLogin,
-  appleLogin
-} from "../auth";
+import { OptionsContext } from "@options";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { unwrapResult } from "@reduxjs/toolkit";
+import React, { useContext, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest, signupRequest } from "../auth";
+import { validateEmail } from "../constants";
+import { buttonStyles, Color, textInputStyles } from "./styles";
 
 // Custom Text Input
 export const TextInputField = (props) => (
@@ -51,7 +29,7 @@ export const TextInputField = (props) => (
 // Custom Button
 export const Button = (props) => (
   <TouchableOpacity onPress={props.onPress} disabled={props.loading}>
-    <View style={[buttonStyles.viewStyle, props.viewStyle]}>
+    <View style={[buttonStyles.viewStyle, props.buttonStyle]}>
       {props.loading
         ? (
         <ActivityIndicator
@@ -60,117 +38,19 @@ export const Button = (props) => (
         />
           )
         : (
-        <Text style={[buttonStyles.textStyle, props.textStyle]}>
-          {props.title}
-        </Text>
+          <Text style={[buttonStyles.textStyle, props.buttonTextStyle]}>
+            {props.title}
+          </Text>
           )}
     </View>
   </TouchableOpacity>
 );
 
-// Grouped Social Buttons View
-const SocialButtonsView = (props) => (
-  <View>
-    <Text style={{ textAlign: "center", width: "100%", marginVertical: 5 }}>
-      - or -
-    </Text>
-    <Button
-      title="Signin with Facebook"
-      viewStyle={{
-        backgroundColor: Color.facebook,
-        borderColor: Color.facebook,
-        marginHorizontal: 5,
-        marginBottom: 2
-      }}
-      textStyle={{ color: Color.white }}
-      loading={props.loading}
-      onPress={props.onFacebookConnect}
-    />
-    <GoogleSigninButton
-      onPress={props.onGoogleConnect}
-      size={GoogleSigninButton.Size.Wide}
-      color={GoogleSigninButton.Color.Dark}
-      disabled={props.loading}
-      style={{ width: "99%", height: 48, marginHorizontal: 2 }}
-    />
-    {(Platform.OS === "ios" || appleAuthAndroid.isSupported) && (
-      <AppleButton
-        onPress={props.onAppleConnect}
-        buttonStyle={AppleButton.Style.WHITE_OUTLINE}
-        buttonType={AppleButton.Type.SIGN_IN}
-        style={{
-          width: "97%", // You must specify a width
-          height: 44, // You must specify a height
-          marginHorizontal: 5,
-          marginTop: 2
-        }}
-      />
-    )}
-  </View>
-);
+// Signup Component Tab
 
-const onFacebookConnect = async (dispatch, navigation) => {
-  try {
-    const fbResult = await LoginManager.logInWithPermissions([
-      "public_profile",
-      "email"
-    ]);
-    if (!fbResult.isCancelled) {
-      const data = await AccessToken.getCurrentAccessToken();
-      dispatch(facebookLogin({ access_token: data.accessToken }))
-        .then(unwrapResult)
-        .then((res) => {
-          if (res.key) navigation.navigate(HOME_SCREEN_NAME);
-        });
-    }
-  } catch (err) {
-    console.log("Facebook Login Failed: ", JSON.stringify(err));
-  }
-};
-
-const onGoogleConnect = async (dispatch, navigation) => {
-  GoogleSignin.configure({
-    webClientId: GOOGLE_WEB_CLIENT_ID, // client ID of type WEB for your server
-    offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-    forceCodeForRefreshToken: false,
-    iosClientId: GOOGLE_IOS_CLIENT_ID
-  });
-  try {
-    await GoogleSignin.hasPlayServices();
-    await GoogleSignin.signIn();
-    const tokens = await GoogleSignin.getTokens();
-    dispatch(googleLogin({ access_token: tokens.accessToken }))
-      .then(unwrapResult)
-      .then((res) => {
-        if (res.key) navigation.navigate(HOME_SCREEN_NAME);
-      });
-  } catch (err) {
-    if (err.code === statusCodes.SIGN_IN_CANCELLED) {
-      Alert.alert("Error", "The user canceled the signin request.");
-    }
-  }
-};
-
-const onAppleConnect = async (dispatch, navigation) => {
-  try {
-    const signinFunction = Platform.select({
-      ios: appleForiOS,
-      android: appleForAndroid
-    });
-    const result = await signinFunction();
-    dispatch(
-      appleLogin({ id_token: result.id_token, access_token: result.code })
-    )
-      .then(unwrapResult)
-      .then((res) => {
-        if (res.key) navigation.navigate(HOME_SCREEN_NAME);
-      });
-  } catch (err) {
-    console.log(JSON.stringify(err));
-  }
-};
-
-export const SignupTab = ({ navigation }) => {
+export const SignupTab = ({ navigation, route }) => {
+  const options = useContext(OptionsContext);
+  const { textInputStyle, buttonStyle, buttonTextStyle } = route.params;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -178,8 +58,7 @@ export const SignupTab = ({ navigation }) => {
     email: "",
     password: ""
   });
-
-  const { api } = useSelector((state) => state.login);
+  const { api } = useSelector((state) => state.Login);
   const dispatch = useDispatch();
 
   const onSignupPress = async () => {
@@ -225,6 +104,7 @@ export const SignupTab = ({ navigation }) => {
           onChangeText={(value) => setEmail(value)}
           value={email}
           error={validationError.email}
+          textInputStyle={textInputStyle}
         />
         <TextInputField
           label="Password"
@@ -233,6 +113,7 @@ export const SignupTab = ({ navigation }) => {
           onChangeText={(value) => setPassword(value)}
           value={password}
           error={validationError.password}
+          textInputStyle={textInputStyle}
         />
         <TextInputField
           label="Confirm Password"
@@ -240,18 +121,15 @@ export const SignupTab = ({ navigation }) => {
           secureTextEntry={true}
           onChangeText={(value) => setConfirmPassword(value)}
           value={confirmPassword}
+          textInputStyle={textInputStyle}
         />
       </View>
       <Button
-        title="Sign Up"
+        title={options.SignUpButtonText}
         loading={api.loading === "pending"}
         onPress={onSignupPress}
-      />
-      <SocialButtonsView
-        loading={api.loading === "pending"}
-        onFacebookConnect={() => onFacebookConnect(dispatch, navigation)}
-        onGoogleConnect={() => onGoogleConnect(dispatch, navigation)}
-        onAppleConnect={() => onAppleConnect(dispatch, navigation)}
+        buttonStyle={buttonStyle}
+        buttonTextStyle={buttonTextStyle}
       />
       {!!api.error && (
         <Text style={textInputStyles.error}>{api.error.message}</Text>
@@ -260,7 +138,9 @@ export const SignupTab = ({ navigation }) => {
   );
 };
 
-export const SignInTab = ({ navigation }) => {
+export const SignInTab = ({ navigation, route }) => {
+  const options = useContext(OptionsContext);
+  const { textInputStyle, buttonStyle, buttonTextStyle } = route.params;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState({
@@ -268,7 +148,7 @@ export const SignInTab = ({ navigation }) => {
     password: ""
   });
 
-  const { api } = useSelector((state) => state.login);
+  const { api } = useSelector((state) => state.Login);
   const dispatch = useDispatch();
 
   const onSigninPress = async () => {
@@ -288,8 +168,11 @@ export const SignInTab = ({ navigation }) => {
 
     dispatch(loginRequest({ username: email, password }))
       .then(unwrapResult)
-      .then((res) => {
-        if (res.token) navigation.navigate(HOME_SCREEN_NAME);
+      .then(async (res) => {
+        if (res.token) {
+          await AsyncStorage.setItem("access_token", res.token);
+          navigation.navigate(options.HOME_SCREEN_NAME);
+        }
       })
       .catch((err) => console.log(err.message));
   };
@@ -304,6 +187,7 @@ export const SignInTab = ({ navigation }) => {
           onChangeText={(value) => setEmail(value)}
           value={email}
           error={validationError.email}
+          textInputStyle={textInputStyle}
         />
         <TextInputField
           label="Password"
@@ -312,15 +196,17 @@ export const SignInTab = ({ navigation }) => {
           onChangeText={(value) => setPassword(value)}
           value={password}
           error={validationError.password}
+          textInputStyle={textInputStyle}
         />
       </View>
 
       <Button
-        title="Login"
+        title={options.SignInButtonText}
         loading={api.loading === "pending"}
         onPress={onSigninPress}
+        buttonStyle={buttonStyle}
+        buttonTextStyle={buttonTextStyle}
       />
-
       {!!api.error && (
         <Text style={textInputStyles.error}>{api.error.message}</Text>
       )}
@@ -340,12 +226,6 @@ export const SignInTab = ({ navigation }) => {
           <Text>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <SocialButtonsView
-        loading={api.loading === "pending"}
-        onFacebookConnect={() => onFacebookConnect(dispatch)}
-        onGoogleConnect={() => onGoogleConnect(dispatch)}
-        onAppleConnect={() => onAppleConnect(dispatch)}
-      />
     </KeyboardAvoidingView>
   );
 };
