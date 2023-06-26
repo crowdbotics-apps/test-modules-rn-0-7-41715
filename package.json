@@ -32,7 +32,6 @@
     "@modules/splash": "file:./modules/splash/",
     "@modules/terms-and-conditions-webview": "file:./modules/terms-and-conditions-webview/",
     "@modules/typeform-webhook": "file:./modules/typeform-webhook/",
-    "@modules/user-profile": "file:./modules/user-profile/",
     "@modules/wallet-connect": "file:./modules/wallet-connect/",
     "@modules/youtube-player": "file:./modules/youtube-player/",
     "@modules/zoom-free-calling": "file:./modules/zoom-free-calling/",
