@@ -44,8 +44,14 @@ function GlobalOptions({
   const globalInfo = Object.entries(global).map(([key, val]) => {
     return <View style={options.styles.text} key={key}>
         <Text style={options.styles.boldText}>{key}</Text>
+<<<<<<< Updated upstream
         <Text>{val}</Text>
       </View>;
+=======
+        {/* <Text>{val}</Text>r */}
+      </View>
+    );
+>>>>>>> Stashed changes
   });
   return <View>
       <Text style={options.styles.text}>
