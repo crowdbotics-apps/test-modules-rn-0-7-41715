@@ -58,7 +58,6 @@ This react_native application was built with Crowdbotics www.crowdbotics.com
 ## Modules (THIS SECTION IS AUTO-GENERATED, PLEASE DO NOT EDIT)
 
 This section will show any installed modules you add from the Storyboard Modules section.
-- [react-native-login](modules/login)
 - [react-native-qr-code](modules/qr-code)
 - [react-native-navigation-tabs](modules/navigation-tabs)
 - [react-native-privacy-policy-webview](modules/privacy-policy-webview)
