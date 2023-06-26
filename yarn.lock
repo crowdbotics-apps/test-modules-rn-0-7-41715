@@ -1929,9 +1929,6 @@
     react-native-dropdown-picker "5.3.0"
     react-native-screens "3.10.2"
 
-"@modules/articles@file:./modules/articles":
-  version "1.0.0"
-
 "@modules/chat@file:./modules/chat":
   version "1.1.0"
   dependencies:
@@ -2047,7 +2044,7 @@
 "@modules/youtube-player@file:./modules/youtube-player":
   version "1.0.0"
 
-"@modules/zoom-free-calling@file:./modules/zoom-free-calling/":
+"@modules/zoom-free-calling@file:./modules/zoom-free-calling":
   version "1.0.1"
   dependencies:
     react-native-base64 "0.2.1"
