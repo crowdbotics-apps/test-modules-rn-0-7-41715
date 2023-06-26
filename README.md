@@ -63,7 +63,6 @@ This section will show any installed modules you add from the Storyboard Modules
 - [react-native-login](modules/login)
 - [react-native-qr-code](modules/qr-code)
 - [react-native-chat](modules/chat)
-- [react-native-2fa](modules/2fa)
 - [react-native-navigation-tabs](modules/navigation-tabs)
 - [react-native-privacy-policy-webview](modules/privacy-policy-webview)
 - [react-native-terms-and-conditions-webview](modules/terms-and-conditions-webview)
