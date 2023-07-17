@@ -12,6 +12,9 @@
     "web:build": "./node_modules/.bin/webpack --config ./webpack.config.js --color --mode production"
   },
   "dependencies": {
+    "@modules/azure-ad-auth": "file:./modules/react-native-azure-ad-auth",
+    "@screens/load-funds-invoice": "file:./screens/screen-load-funds-invoice",
+    "@screens/profile": "file:./screens/screen-profile",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@babel/polyfill": "^7.12.1",
     "@react-native-async-storage/async-storage": "1.17.1",
