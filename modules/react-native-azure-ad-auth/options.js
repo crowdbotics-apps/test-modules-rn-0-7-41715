@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-
 const styles = StyleSheet.create({
   backgroundColor: {
     backgroundColor: "#0d7fd8"
@@ -95,18 +94,15 @@ const styles = StyleSheet.create({
     borderRadius: 3
   }
 });
-
 const AZURE_AUTH_OPTIONS = {
   tenant: "",
   clientId: "",
   redirectUri: ""
-}
-
+};
 const AUTHORIZE_OPTIONS = {
   prompt: "login",
   scope: "openid profile User.Read"
-}
-
+};
 export default {
   styles: styles,
   AZURE_AUTH_OPTIONS: AZURE_AUTH_OPTIONS,

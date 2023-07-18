@@ -6,18 +6,17 @@ import { mapObjectToArray, validateConfig } from "./utils";
 
 const AzureADAuth = () => {
   // Configurations Variable contains (styles, AZURE_AUTH_OPTIONS, AUTHORIZE_OPTIONS)
-  const options = useContext(OptionsContext);
-  // Saving the User and Token Information such as givenName, rawIdToken and accessToken
-  const [userInfo, setUserInfo] = useState([]);
-  // Saving the instance AzureAuth which is coming from "react-native-azure-auth"
+  const options = useContext(OptionsContext); // Saving the User and Token Information such as givenName, rawIdToken and accessToken
+
+  const [userInfo, setUserInfo] = useState([]); // Saving the instance AzureAuth which is coming from "react-native-azure-auth"
   // and futher instances will also save through AzureAuth
+
   const [azureAuth, setAzureAuth] = useState(null);
-
   const [loader, setLoader] = useState(false);
-
   useEffect(() => {
     // Validations of the configurations i.e tenant, clientId, redirectUri, prompt and scope
     const errors = validateConfig(options.AZURE_AUTH_OPTIONS, options.AUTHORIZE_OPTIONS);
+
     if (!errors.length) {
       // To initiate the AzureAuth instance and set through the above useState
       const azureAuth = new AzureAuth(options.AZURE_AUTH_OPTIONS);
@@ -37,22 +36,23 @@ const AzureADAuth = () => {
     // includes the parameters tenant, clientId, redirectUri
     return azureAuth.webAuth.authorize(options.AUTHORIZE_OPTIONS);
   };
-  const msGraphRequest = (payload) => {
+
+  const msGraphRequest = payload => {
     // To retreive the user information and sending token and path as payload
     return azureAuth.auth.msGraphRequest(payload);
   };
 
   const fetchUserInfo = async () => {
     try {
-      setLoader(true);
-      // fetch the token
-      const token = await authorize();
-      // fetch the user information
+      setLoader(true); // fetch the token
+
+      const token = await authorize(); // fetch the user information
+
       const userInfo = await msGraphRequest({
         token: token.accessToken,
         path: "/me"
-      });
-      // incorporating the user information and token information
+      }); // incorporating the user information and token information
+
       setUserInfo([{
         title: "User Information",
         data: mapObjectToArray(userInfo)
@@ -62,24 +62,23 @@ const AzureADAuth = () => {
       }]);
       setLoader(false);
     } catch (error) {
-      setLoader(false);
-      // The error messages will show up if there is any error
+      setLoader(false); // The error messages will show up if there is any error
+
       Alert.alert("Error", "error_description" in error ? error.error_description : error.message);
     }
   };
 
-  const FlatListItem = ({ item }) => {
+  const FlatListItem = ({
+    item
+  }) => {
     // listitem will display to show the fields containing information
-    return (
-      <View style={[options.styles.listItem, options.styles.commonRadius]}>
+    return <View style={[options.styles.listItem, options.styles.commonRadius]}>
         <Text style={[options.styles.infoHeading, options.styles.fontSixteen, options.styles.infoColor, options.styles.fontBold]}>{item.key}</Text>
         <Text style={[options.styles.infoColor, options.styles.fontSixteen]}>{typeof item.value === "string" ? item.value : JSON.stringify(item.value)}</Text>
-      </View>
-    );
+      </View>;
   };
 
-  return (
-    <SafeAreaView style={options.styles.safeArea}>
+  return <SafeAreaView style={options.styles.safeArea}>
       <View style={options.styles.container}>
         <View style={[options.styles.header, options.styles.backgroundColor, options.styles.alignCenter]}>
           <Image style={options.styles.logo} source={require("./assets/logo.png")} />
@@ -94,28 +93,21 @@ const AzureADAuth = () => {
           <Text style={[options.styles.title, options.styles.fontSixteen]}>Login with Azure AD</Text>
         </TouchableOpacity>
         <View style={[options.styles.responseSection, options.styles.backgroundWhite, options.styles.commonPadding, options.styles.commonRadius, options.styles.alignCenter]}>
-          {loader
-            ? <ActivityIndicator />
-            : <Fragment>
-            {
-              userInfo.length === 0 &&
-              <Text style={[options.styles.fontSixteen, options.styles.indicationText, options.styles.lineHeight22, options.styles.textCenter]}>
+          {loader ? <ActivityIndicator /> : <Fragment>
+            {userInfo.length === 0 && <Text style={[options.styles.fontSixteen, options.styles.indicationText, options.styles.lineHeight22, options.styles.textCenter]}>
                 Press on &quot;Login with Azure AD&quot; button to Authenticate and to get User Information
-              </Text>
+              </Text>}
+            <SectionList sections={userInfo} renderItem={({
+            item
+          }) => <FlatListItem item={item} />} renderSectionHeader={({
+            section: {
+              title
             }
-            <SectionList
-              sections={userInfo}
-              renderItem={({ item }) => <FlatListItem item={item} />}
-              renderSectionHeader={({ section: { title } }) => (
-                <Text style={options.styles.sectionHeaderTitle}>{title}</Text>
-              )}
-            />
-          </Fragment>
-          }
+          }) => <Text style={options.styles.sectionHeaderTitle}>{title}</Text>} />
+          </Fragment>}
         </View>
       </View>
-    </SafeAreaView>
-  );
+    </SafeAreaView>;
 };
 
 export default {

@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import { Text, View, StyleSheet, Image, Pressable, ScrollView } from "react-native";
 
 const LoadFundsInvoice = () => {
   // Minimum amount is being set through this variable
   const [tokenValue, setTokenValue] = useState(110);
-  const [selectedTab, setSelectedTab] = useState(0);
-  // Title of currencies that can be loaded are defined in this array
-  const tabTitles = ["Dollar", "Bitcoin", "Euro", "Pound"];
-  return (
-    <View style={styles.container}>
+  const [selectedTab, setSelectedTab] = useState(0); // Title of currencies that can be loaded are defined in this array
 
+  const tabTitles = ["Dollar", "Bitcoin", "Euro", "Pound"];
+  return <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View style={styles.headerView}>
-        <Image source={require("./assets/back.png")} style={styles.backIcon}/>
+        <Image source={require("./assets/back.png")} style={styles.backIcon} />
         <View style={styles.subHeaderView}>
           <Text style={styles.headerTitle}>Load funds</Text>
         </View>
@@ -19,28 +17,12 @@ const LoadFundsInvoice = () => {
       <Text style={styles.heading}>Enter your amount</Text>
       <Text style={styles.subHeading}>Choose currency</Text>
 
-      <TabView
-        tabTitles={tabTitles}
-        selected={selectedTab}
-        icons={[
-          require("./assets/dollarIcon.png"),
-          require("./assets/bitcoinIcon.png"),
-          require("./assets/euroIcon.png"),
-          require("./assets/poundIcon.png")
-        ]}
-        // Pass true or false to show the currency titles with their respective icons
-        hideTitles={false}
-        onPress={setSelectedTab}
-        style={styles.tabView}
-      />
+      <TabView tabTitles={tabTitles} selected={selectedTab} icons={[require("./assets/dollarIcon.png"), require("./assets/bitcoinIcon.png"), require("./assets/euroIcon.png"), require("./assets/poundIcon.png")]} // Pass true or false to show the currency titles with their respective icons
+    hideTitles={false} onPress={setSelectedTab} style={styles.tabView} />
 
-      <InputToken
-        value={tokenValue}
-        onChange={setTokenValue}
-        step={1}
-      />
+      <InputToken value={tokenValue} onChange={setTokenValue} step={1} />
 
-      <View style={[styles.itemContainer, { height: 60 }]}>
+      <View style={[styles.itemContainer, styles.EbCIrmZw]}>
         <Text style={styles.infoText}>Info</Text>
       </View>
       <View style={styles.itemContainer}>
@@ -58,14 +40,15 @@ const LoadFundsInvoice = () => {
         <Text style={styles.totalText}>${(tokenValue + 3).toFixed(2)}</Text>
       </View>
       <Button buttonText="Load Up" style={styles.button} hideShadow={true} />
-    </View>
-  );
+    </ScrollView>;
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    height: "100%"
   },
   headerView: {
     flexDirection: "row",
@@ -128,48 +111,44 @@ const styles = StyleSheet.create({
     color: "#000"
   },
   button: {
-    flex: 1,
-    justifyContent: "flex-end",
-    marginBottom: 50
+    marginTop: 30,
+    marginBottom: 20
+  },
+  EbCIrmZw: {
+    height: 60
   }
 });
-
 export default LoadFundsInvoice;
 
-const InputToken = (props) => {
+const InputToken = props => {
   const {
     step,
     onChange,
     value
-  } = props;
-  // This function is used to reduce the amount to be loaded
-  const decrement = (value) => {
-    return (value -= step);
+  } = props; // This function is used to reduce the amount to be loaded
+
+  const decrement = value => {
+    return value -= step;
+  }; // This function is used to increase the amount to be loaded
+
+
+  const increment = value => {
+    return value += step;
   };
-  // This function is used to increase the amount to be loaded
-  const increment = (value) => {
-    return (value += step);
-  };
-  return (
-    <View style={inputTokenStyles.container}>
+
+  return <View style={inputTokenStyles.container}>
       <View style={inputTokenStyles.tokenValueContainer}>
         <Pressable onPress={() => onChange(decrement(value))}>
-          <Image
-            source={require("./assets/decrementIcon.png")}
-            style={inputTokenStyles.icon}
-          />
+          <Image source={require("./assets/decrementIcon.png")} style={inputTokenStyles.icon} />
         </Pressable>
         <Text style={inputTokenStyles.fnt18}>{value.toFixed(2)}</Text>
         <Pressable onPress={() => onChange(increment(value))}>
-          <Image
-            source={require("./assets/incrementIcon.png")}
-            style={inputTokenStyles.icon}
-          />
+          <Image source={require("./assets/incrementIcon.png")} style={inputTokenStyles.icon} />
         </Pressable>
       </View>
-    </View>
-  );
+    </View>;
 };
+
 const inputTokenStyles = StyleSheet.create({
   container: {
     marginVertical: 10
@@ -193,7 +172,8 @@ const inputTokenStyles = StyleSheet.create({
     resizeMode: "contain"
   }
 });
-const TabView = (props) => {
+
+const TabView = props => {
   const {
     tabTitles,
     selected,
@@ -203,49 +183,26 @@ const TabView = (props) => {
     style,
     icons,
     hideTitles
-  } = props;
-  // This variable applies the background color(passed through props) to the tab.
+  } = props; // This variable applies the background color(passed through props) to the tab.
+
   const tabColorStyle = {
     backgroundColor: tabColor || "#fff"
-  };
-  // This variable applies the background color(passed through props) to the tab container.
+  }; // This variable applies the background color(passed through props) to the tab container.
+
   const backgroundColorStyle = {
     backgroundColor: backgroundColor || "#F1F1F1"
   };
-  const propStyle = style || {};
-  // This variable is used to map currencies if either one of them has some data in it
+  const propStyle = style || {}; // This variable is used to map currencies if either one of them has some data in it
+
   const generator = icons || tabTitles;
-  return (
-    <View
-      style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}
-    >
-      {generator.map((item, index) => (
-        <Pressable
-          onPress={() => (onPress ? onPress(index) : null)}
-          style={
-           [tabColorStyle, tabViewStyles.tabItem]
-          }
-          key={index}
-        >
-          {icons
-            ? (
-            <Image
-              source={icons[index]}
-              style={[
-                tabViewStyles.icon,
-                index === selected
-                  ? tabViewStyles.selectedIcon
-                  : tabViewStyles.unSelectedIcon
-              ]}
-            />
-              )
-            : null}
+  return <View style={[tabViewStyles.paletteContainer, backgroundColorStyle, propStyle]}>
+      {generator.map((item, index) => <Pressable onPress={() => onPress ? onPress(index) : null} style={[tabColorStyle, tabViewStyles.tabItem]} key={index}>
+          {icons ? <Image source={icons[index]} style={[tabViewStyles.icon, index === selected ? tabViewStyles.selectedIcon : tabViewStyles.unSelectedIcon]} /> : null}
           {!hideTitles && <Text>{tabTitles[index]}</Text>}
-        </Pressable>
-      ))}
-    </View>
-  );
+        </Pressable>)}
+    </View>;
 };
+
 const tabViewStyles = StyleSheet.create({
   paletteContainer: {
     height: 48,
@@ -265,7 +222,7 @@ const tabViewStyles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     backgroundColor: "#fff",
-    marginHorizontal: 5,
+    marginHorizontal: 3,
     shadowColor: "#000",
     elevation: 10
   },
@@ -283,7 +240,7 @@ const tabViewStyles = StyleSheet.create({
   }
 });
 
-const Button = (params) => {
+const Button = params => {
   const {
     color,
     textColor,
@@ -292,10 +249,10 @@ const Button = (params) => {
     onPress,
     buttonText,
     children
-  } = params;
-   // This variable changes the background color of the pressable button.
-  const backgroundColor = color || "#000";
-  // This variable changes the text color of the pressable button.
+  } = params; // This variable changes the background color of the pressable button.
+
+  const backgroundColor = color || "#000"; // This variable changes the text color of the pressable button.
+
   const buttonTextColor = textColor || "#fff";
   const btnStyle = {
     backgroundColor: backgroundColor,
@@ -305,20 +262,14 @@ const Button = (params) => {
   const btnText = {
     color: buttonTextColor
   };
-  return (
-    <View style={[buttonStyles.btnContainer, style]}>
-        <Pressable
-          style={[buttonStyles.btn, btnStyle]}
-          onPress={onPress}
-        >
-          <Text style={[buttonStyles.btnText, btnText]}>
-            {buttonText}
-          </Text>
-          <View style={styles.childrenContainer}>{children}</View>
-        </Pressable>
-    </View>
-  );
+  return <View style={[buttonStyles.btnContainer, style]}>
+      <Pressable style={[buttonStyles.btn, btnStyle]} onPress={onPress}>
+        <Text style={[buttonStyles.btnText, btnText]}>{buttonText}</Text>
+        <View style={styles.childrenContainer}>{children}</View>
+      </Pressable>
+    </View>;
 };
+
 const buttonStyles = StyleSheet.create({
   btnContainer: {
     justifyContent: "center"
