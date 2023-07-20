@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import {
   View,
   Text,
@@ -8,7 +9,6 @@ import {
   TouchableOpacity,
   Pressable
 } from "react-native"
-import React, { useState } from "react"
 
 const cardWidth = 300
 const Promotion = () => {
@@ -19,7 +19,7 @@ const Promotion = () => {
       title: "Next Bill",
       price: "52.9€",
       description: "Pay by 25th Mar",
-      imageActive: require("./assets/invoicewhite.png")
+      imageActive: require("./assets/smile.png")
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ const Promotion = () => {
       title: "Next Bill",
       price: "52.9€",
       description: "Pay by 25th Mar",
-      imageActive: require("./assets/invoicewhite.png")
+      imageActive: require("./assets/smile.png")
     },
     {
       id: 3,
@@ -35,7 +35,7 @@ const Promotion = () => {
       title: "Next Bill",
       price: "52.9€",
       description: "Pay by 25th Mar",
-      imageActive: require("./assets/invoicewhite.png")
+      imageActive: require("./assets/smile.png")
     },
     {
       id: 4,
@@ -43,7 +43,28 @@ const Promotion = () => {
       title: "Next Bill",
       price: "52.9€",
       description: "Pay by 25th Mar",
-      imageActive: require("./assets/invoicewhite.png")
+      imageActive: require("./assets/smile.png")
+    }
+  ]
+
+  const topCardData = [
+    {
+      title: "Happy",
+      description:
+        "Your dinner for 2 at Wagamama is waiting for you. Redeem until 24.02.22",
+      backgroundImage: require("./assets/vodafone.jpg")
+    },
+    {
+      title: "Happy",
+      description:
+        "Your dinner for 2 at Wagamama is waiting for you. Redeem until 24.02.22",
+      backgroundImage: require("./assets/vodafone.jpg")
+    },
+    {
+      title: "Happy",
+      description:
+        "Your dinner for 2 at Wagamama is waiting for you. Redeem until 24.02.22",
+      backgroundImage: require("./assets/vodafone.jpg")
     }
   ]
   const [selectedCard, setSelectedCard] = useState()
@@ -56,52 +77,55 @@ const Promotion = () => {
           </Text>
           <Text style={[styles.whiteText, styles.tagLine]}>Good Morning</Text>
         </View>
-        <Image
-          style={styles.userImg}
-          source={require("./assets/user.png")}
-        />
+        <Image style={styles.userImg} source={require("./assets/user.png")} />
       </View>
       <Text style={styles.heading}>Latest for you</Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.paddingLeft20}
+        contentContainerStyle={styles.paddingLeft10}
       >
-        {[1, 2].map(el => (
-          <ImageBackground
-            imageStyle={{ borderRadius: 10 }}
-            style={styles.cardBackground}
-            source={require("./assets/vodafone.jpg")}
-            resizeMode="cover"
-          >
-            <View style={[styles.smileIcon, styles.alignItems, styles.flexRow]}>
-              <Text style={[styles.happyText, styles.colorWhite]}>Happy</Text>
-            </View>
-            <Text
-              style={[
-                styles.cardText,
-                styles.colorWhite,
-                styles.fontSize14,
-                styles.fontWeight,
-                styles.paddingLeft20
-              ]}
+        {topCardData
+          .map(item => (
+            <ImageBackground
+              imageStyle={{ borderRadius: 10 }}
+              style={styles.cardBackground}
+              source={item.backgroundImage}
+              resizeMode="cover"
             >
-              Your dinner for 2 at Wagamama is waiting for you. Redeem until
-              24.02.22
-            </Text>
-            <TouchableOpacity
-              style={[styles.alignItems, styles.flexRow, styles.paddingLeft20]}
-            >
-              <Text style={[styles.colorWhite, styles.fontSize14]}>
-                Learn More
+              <View
+                style={[styles.smileIcon, styles.alignItems, styles.flexRow]}
+              >
+                <Text style={[styles.happyText, styles.colorWhite]}>{item.title}</Text>
+              </View>
+              <Text
+                style={[
+                  styles.cardText,
+                  styles.colorWhite,
+                  styles.fontSize14,
+                  styles.fontWeight,
+                  styles.paddingLeft20
+                ]}
+              >
+                {item.description}
               </Text>
-              <Image
-                style={styles.arrowImage}
-                source={require("./assets/rightchevron.png")}
-              />
-            </TouchableOpacity>
-          </ImageBackground>
-        ))}
+              <TouchableOpacity
+                style={[
+                  styles.alignItems,
+                  styles.flexRow,
+                  styles.paddingLeft20
+                ]}
+              >
+                <Text style={[styles.colorWhite, styles.fontSize14]}>
+                  Learn More
+                </Text>
+                <Image
+                  style={styles.arrowImage}
+                  source={require("./assets/rightchevron.png")}
+                />
+              </TouchableOpacity>
+            </ImageBackground>
+          ))}
       </ScrollView>
       <View
         style={[
@@ -144,15 +168,15 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   },
   userImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 50
+    width: 60,
+    height: 30,
+    borderRadius: 10
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     paddingHorizontal: 20,
-    paddingVertical: 25,
+    paddingVertical: 20,
     color: "#000"
   },
   cardBackground: {
@@ -200,13 +224,16 @@ const styles = StyleSheet.create({
   paddingLeft20: {
     paddingLeft: 20
   },
+  paddingLeft10: {
+    paddingLeft: 10
+  },
   cardContainer: {
     paddingTop: 30,
-    paddingLeft: 20,
+    paddingLeft: 10,
     flexWrap: "wrap"
   },
   cardItem: {
-    width: "46%",
+    width: "47.5%",
     borderRadius: 10,
     height: 120,
     backgroundColor: "#fff",

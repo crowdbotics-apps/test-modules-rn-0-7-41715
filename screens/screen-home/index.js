@@ -41,6 +41,27 @@ const Home = () => {
     }
   ]
 
+  const topCardData = [
+    {
+      title: "Happy",
+      description:
+        "Your dinner for 2 at Wagamama is waiting for you. Redeem until 24.02.22",
+      backgroundImage: require("./assets/pizzacard.jpg")
+    },
+    {
+      title: "Happy",
+      description:
+        "Your dinner for 2 at Wagamama is waiting for you. Redeem until 24.02.22",
+      backgroundImage: require("./assets/pizzacard.jpg")
+    },
+    {
+      title: "Happy",
+      description:
+        "Your dinner for 2 at Wagamama is waiting for you. Redeem until 24.02.22",
+      backgroundImage: require("./assets/pizzacard.jpg")
+    }
+  ]
+
   const [selectedStory, setSelectedStory] = useState()
   const [selectedCard, setSelectedCard] = useState()
 
@@ -84,11 +105,11 @@ const Home = () => {
       style={[styles.container, styles.paddingVertical20, styles.paddingLeft20]}
     >
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {[1, 2].map(el => (
+        {topCardData.map(item => (
           <ImageBackground
             imageStyle={{ borderRadius: 10 }}
             style={styles.cardBackground}
-            source={require("./assets/pizzacard.jpg")}
+            source={item.backgroundImage}
           >
             <View
               style={[
@@ -103,7 +124,9 @@ const Home = () => {
                 style={styles.smileImage}
                 source={require("./assets/smile.png")}
               />
-              <Text style={[styles.happyText, styles.colorWhite]}>Happy</Text>
+              <Text style={[styles.happyText, styles.colorWhite]}>
+                {item.title}
+              </Text>
             </View>
             <Text
               style={[
@@ -115,8 +138,7 @@ const Home = () => {
                 styles.paddingLeft20
               ]}
             >
-              Your dinner for 2 at Wagamama is waiting for you. Redeem until
-              24.02.22
+              {item.description}
             </Text>
 
             <TouchableOpacity

@@ -32,7 +32,7 @@ const getNavigation = modules => {
       screenOptions
     } = globalOptions;
     return <NavigationContainer>
-        <Stack.Navigator initialRouteName={"screenPromotion"} screenOptions={screenOptions}>
+        <Stack.Navigator initialRouteName={"screenBalance"} screenOptions={screenOptions}>
           {routes}
         </Stack.Navigator>
       </NavigationContainer>;
