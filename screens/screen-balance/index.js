@@ -1,5 +1,5 @@
-import React from "react"
-import { View, Text, StyleSheet, Image } from "react-native"
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 const Home = () => {
   return (
@@ -120,9 +120,9 @@ const Home = () => {
         source={require("./assets/phone.jpeg")}
       />
     </View>
-  )
-}
-export default Home
+  );
+};
+export default Home;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   area: {
     flexDirection: "row",
-    gap: 5
+    margin: 5
   },
   fontSize13: {
     fontSize: 13
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
   left: {
     marginVertical: 10,
     padding: 12,
+    paddingVertical: 20,
     backgroundColor: "#fff",
     borderRadius: 4,
     width: "48%"
@@ -261,13 +262,14 @@ const styles = StyleSheet.create({
   },
   invoiceImage: {
     height: 24,
-    width: 24
+    width: 24,
+    marginRight: 10
   },
   textHead: {
     fontSize: 16
   },
   gap: {
-    gap: 10
+    margin: 10
   },
   dataView: {
     marginTop: 10
@@ -294,12 +296,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#c70404",
     borderRadius: 4,
     marginVertical: 10,
-    padding: 10
+    padding: 10,
+    marginLeft: 5
   },
   TopUpCard: {
     backgroundColor: "#fff",
     borderRadius: 4,
-    padding: 10
+    padding: 10,
+    marginLeft: 5
   },
   right: {
     width: "49%"
@@ -314,4 +318,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10
   }
-})
+});
