@@ -1,5 +1,5 @@
+import React from "react"
 import { View, Text, StyleSheet, Image } from "react-native"
-import React, { useState } from "react"
 
 const Home = () => {
   return (
@@ -52,13 +52,15 @@ const Home = () => {
             />
             <Text style={[styles.textHead, styles.fontWeight]}>Next Bill</Text>
           </View>
-          <Text style={[styles.fontSize14, styles.currentText]}>
+          <Text style={[styles.fontSize13, styles.currentText]}>
             Your Current spend is:
           </Text>
           <Text style={[styles.priceText]}>
             52.9<Text style={styles.euro}>€</Text>
           </Text>
-          <Text style={[styles.fontSize12]}>To be paid till 25th Jan</Text>
+          <Text style={[styles.fontSize12, styles.padding5]}>
+            To be paid till 25th Jan
+          </Text>
         </View>
         <View style={styles.right}>
           <View style={styles.offerCard}>
@@ -113,7 +115,7 @@ const Home = () => {
       </View>
       <Text style={[styles.fontWeight, styles.discover]}>Discover</Text>
       <Image
-        resizeMode="contain"
+        resizeMode="cover"
         style={styles.discoverImages}
         source={require("./assets/phone.jpeg")}
       />
@@ -168,13 +170,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 5
   },
+  fontSize13: {
+    fontSize: 13
+  },
   priceText: {
     fontSize: 30,
     paddingTop: 10
   },
   shadowProp: {
     shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {
+      width: -2,
+      height: 4
+    },
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 1
@@ -201,7 +209,6 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30
   },
-
   downloadImage: {
     height: 20,
     width: 24
@@ -221,14 +228,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "800"
   },
-
   flexRow: {
     flexDirection: "row"
   },
   alignItems: {
     alignItems: "center"
   },
-
   colorWhite: {
     color: "#fff"
   },
@@ -244,10 +249,12 @@ const styles = StyleSheet.create({
   paddingLeft20: {
     paddingLeft: 20
   },
-
   shadowProp: {
     shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: {
+      width: -2,
+      height: 4
+    },
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 1
@@ -259,7 +266,6 @@ const styles = StyleSheet.create({
   textHead: {
     fontSize: 16
   },
-
   gap: {
     gap: 10
   },
@@ -304,6 +310,7 @@ const styles = StyleSheet.create({
   },
   discoverImages: {
     width: "100%",
+    height: 150,
     borderRadius: 10,
     marginTop: 10
   }
